@@ -17,5 +17,19 @@
   -->
 
 <resources>
-    <string name="app_name">Doofenschmirtz</string>
+
+    <!-- TODO Move these to "aosp_styles"? -->
+
+    <!-- TODO Make a separate "material" styles.xml? Etc. etc. etc.? -->
+    <style name="TwoTargetSwitchPreference" parent="Preference.SwitchPreferenceCompat">
+        <item name="android:layout">@layout/aosp_preference_two_target</item>
+        <item name="android:widgetLayout">@layout/aosp_preference_widget_master_switch</item>
+    </style>
+
+    <!-- TODO Make a separate "material" styles.xml? Etc. etc. etc.? -->
+    <style name="YesNoPreference" parent="Preference.DialogPreference.Material">
+        <item name="android:positiveButtonText">@android:string/yes</item>
+        <item name="android:negativeButtonText">@android:string/no</item>
+    </style>
+
 </resources>
