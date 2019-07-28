@@ -77,7 +77,7 @@ public class YesNoPreference extends DialogPreference {
 
     @SuppressWarnings("WeakerAccess")
     public YesNoPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, android.R.attr.yesNoPreferenceStyle);
+        this(context, attrs, R.attr.yesNoPreferenceStyle);
     }
 
     @SuppressWarnings("unused")
