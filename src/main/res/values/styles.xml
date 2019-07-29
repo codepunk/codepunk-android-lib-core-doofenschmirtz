@@ -18,8 +18,6 @@
 
 <resources>
 
-    <!-- TODO Move these to "aosp_styles"? -->
-
     <!-- TODO Make a separate "material" styles.xml? Etc. etc. etc.? -->
     <style name="TwoTargetSwitchPreference" parent="Preference.SwitchPreferenceCompat">
         <item name="android:layout">@layout/aosp_preference_two_target</item>
