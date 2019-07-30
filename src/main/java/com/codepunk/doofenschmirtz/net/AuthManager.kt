@@ -67,6 +67,11 @@ class AuthManager private constructor() {
         val name: String,
 
         /**
+         * The base URL for making RESTful API calls.
+         */
+        val baseUrl: String,
+
+        /**
          * The public identifier used to authenticate and interact with remote APIs.
          */
         val clientId: String?,
@@ -111,7 +116,12 @@ class AuthManager private constructor() {
             /**
              * A user-friendly name for the environment.
              */
-            private val name: String
+            private val name: String,
+
+            /**
+             * The base URL for making RESTful API calls.
+             */
+            private val baseUrl: String
         ) {
 
             // region Properties
@@ -140,7 +150,7 @@ class AuthManager private constructor() {
             /**
              * Builds an immutable [Environment] from the current state.
              */
-            fun build(): Environment = Environment(id, name, clientId, clientSecret).apply {
+            fun build(): Environment = Environment(id, name, baseUrl, clientId, clientSecret).apply {
                 this.extras.putAll(this@Builder.extras)
             }
 
