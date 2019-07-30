@@ -18,14 +18,14 @@
  *
  * The original work can be found at The Android Open Source Project at
  *
- *      https://github.com/aosp-mirror
+ *     https://github.com/aosp-mirror
  *
  * In the following location:
  *
- *      platform_frameworks_base/packages/SettingsLib/src/com/android/settingslib/TwoTargetPreference.java
+ *     platform_frameworks_base/packages/SettingsLib/src/com/android/settingslib/TwoTargetPreference.java
  *
  * Modifications:
- * July 2018: Updated to use local copies of internal Android resources
+ * July 2019: Updated to use local copies of internal Android resources
  *            Updated onBindViewHolder to capture clicks
  */
 

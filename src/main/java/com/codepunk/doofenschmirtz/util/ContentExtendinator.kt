@@ -15,16 +15,18 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.di.qualifier
+package com.codepunk.doofenschmirtz.util
 
-import android.app.Activity
 import android.content.Context
-import javax.inject.Qualifier
+import android.content.Intent
 
 /**
- * A [Qualifier] that specifies an [Activity]-level [Context].
+ * Extension method on [Context] that starts the launch activity. Depending on the flags passed,
+ * this can clear all other activities on the back stack when (re)starting the launch activity.
  */
-@Suppress("UNUSED")
-@Qualifier
-@Retention(AnnotationRetention.RUNTIME)
-annotation class ActivityContext
+fun Context.startLaunchActivity(flags: Int = Intent.FLAG_ACTIVITY_CLEAR_TOP) {
+    packageManager.getLaunchIntentForPackage(packageName)?.run {
+        this.flags = flags
+        startActivity(this)
+    }
+}

@@ -18,13 +18,15 @@
 
 <resources>
 
-    <!-- TODO Make a separate "material" styles.xml? Etc. etc. etc.? -->
+    <style name="AppCompatEditTextEx" parent="Widget.AppCompat.EditText">
+        <item name="clearable">false</item>
+    </style>
+
     <style name="TwoTargetSwitchPreference" parent="Preference.SwitchPreferenceCompat">
         <item name="android:layout">@layout/aosp_preference_two_target</item>
         <item name="android:widgetLayout">@layout/aosp_preference_widget_master_switch</item>
     </style>
 
-    <!-- TODO Make a separate "material" styles.xml? Etc. etc. etc.? -->
     <style name="YesNoPreference" parent="Preference.DialogPreference.Material">
         <item name="android:positiveButtonText">@android:string/yes</item>
         <item name="android:negativeButtonText">@android:string/no</item>

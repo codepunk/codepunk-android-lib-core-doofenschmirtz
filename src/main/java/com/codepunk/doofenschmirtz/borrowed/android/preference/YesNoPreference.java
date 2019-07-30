@@ -18,14 +18,14 @@
  *
  * The original work can be found at The Android Open Source Project at
  *
- *      https://github.com/aosp-mirror
+ *     https://github.com/aosp-mirror
  *
  * In the following location:
  *
- *      platform_frameworks_base/core/java/com/android/internal/preference/YesNoPreference.java
+ *     platform_frameworks_base/core/java/com/android/internal/preference/YesNoPreference.java
  *
  * Modifications:
- * July 2018: Updated to extend support version of DialogPreference
+ * July 2019: Updated to extend support version of DialogPreference
  *            Moved onDialogClosed logic to YesNoPreferenceDialogFragmentCompat as is
  *            consistent with support version of Preference framework
  */

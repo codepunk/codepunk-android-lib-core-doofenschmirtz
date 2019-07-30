@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *       http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -29,9 +29,15 @@ class AuthManager private constructor() {
     // region Properties
 
     /**
+     * Returns an array [Environment]s defined for this AuthManager.
+     */
+    val environments: Array<Environment>
+        get() = environmentsInternal.values.toTypedArray()
+
+    /**
      * A collection of [Environment]s, mapped by their unique identifiers.
      */
-    private val environments = HashMap<String, Environment>()
+    private val environmentsInternal = HashMap<String, Environment>()
 
     // endregion Properties
 
@@ -40,7 +46,7 @@ class AuthManager private constructor() {
     /**
      * Returns the [Environment] with the supplied [id], or null if no such environment is found.
      */
-    fun getEnvironment(id: String): Environment? = environments[id]
+    fun getEnvironment(id: String): Environment? = environmentsInternal[id]
 
     // endregion Methods
 
@@ -190,11 +196,11 @@ class AuthManager private constructor() {
          * Builds an immutable [AuthManager] from the current state.
          */
         fun build(): AuthManager = AuthManager().apply {
-            this.environments.putAll(this@Builder.environments)
+            this.environmentsInternal.putAll(this@Builder.environments)
         }
 
         /**
-         * Puts the supplied [environment] into the [environments] map.
+         * Puts the supplied [environment] into the [environmentsInternal] map.
          */
         fun environment(environment: Environment): Builder {
             environments[environment.id] = environment
