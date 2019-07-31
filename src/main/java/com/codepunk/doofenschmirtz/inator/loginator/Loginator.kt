@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.util.loginator
+package com.codepunk.doofenschmirtz.inator.loginator
 
 import android.app.ActivityManager
 import android.app.Application

@@ -30,6 +30,12 @@
 
     <!-- endregion Common -->
 
+    <!-- region Auth -->
+
+    <string name="auth_token_type_default">Default</string>
+
+    <!-- endregion Auth -->
+
     <!-- region Errors -->
 
     <string name="unknown_error_message">An unknown error occurred.</string>

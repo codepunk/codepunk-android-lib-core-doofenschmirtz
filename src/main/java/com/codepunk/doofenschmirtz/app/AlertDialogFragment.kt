@@ -31,7 +31,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.codepunk.doofenschmirtz.R
-import com.codepunk.doofenschmirtz.util.makeKey
+import com.codepunk.doofenschmirtz.inator.makeKey
 
 /**
  * A generic [DialogFragment] that uses request codes and "showDialogFragmentForResult" methods

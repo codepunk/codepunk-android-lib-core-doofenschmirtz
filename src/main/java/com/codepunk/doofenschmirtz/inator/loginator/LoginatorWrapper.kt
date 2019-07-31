@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.util.loginator
+package com.codepunk.doofenschmirtz.inator.loginator
 
 /**
  * Proxying implementation of [Loginator] that simply delegates all of its calls to another

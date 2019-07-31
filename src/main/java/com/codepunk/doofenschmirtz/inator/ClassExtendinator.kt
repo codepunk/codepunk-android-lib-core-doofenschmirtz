@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.util
+package com.codepunk.doofenschmirtz.inator
 
 import kotlin.reflect.KClass
 

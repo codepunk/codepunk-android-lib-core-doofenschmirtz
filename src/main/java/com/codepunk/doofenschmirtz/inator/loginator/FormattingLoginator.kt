@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.util.loginator
+package com.codepunk.doofenschmirtz.inator.loginator
 
 import android.util.Log.*
-import com.codepunk.doofenschmirtz.util.topLevelClass
+import com.codepunk.doofenschmirtz.inator.topLevelClass
 
 // region Constants
 
