@@ -20,8 +20,6 @@ package com.codepunk.doofenschmirtz.retrofit.interceptor
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import javax.inject.Inject
-import javax.inject.Singleton
 
 // region Constants
 
@@ -54,8 +52,7 @@ const val HEADER_VALUE_AUTHORIZATION = "Bearer $HEADER_VALUE_AUTH_TOKEN_PLACEHOL
  * [HEADER_VALUE_AUTH_TOKEN_PLACEHOLDER] will be replaced with the authToken (if any) currently
  * stored in [SessionManager].
  */
-@Singleton
-class AuthorizationInterceptor @Inject constructor(
+class AuthorizationInterceptor(
 
     /* TODO
     /**

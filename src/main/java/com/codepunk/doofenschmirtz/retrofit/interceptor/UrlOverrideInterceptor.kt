@@ -22,14 +22,11 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import retrofit2.Retrofit
 import java.io.IOException
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * An OkHttp3 [Interceptor] that allows us to change the base URL.
  */
-@Singleton
-class UrlOverrideInterceptor @Inject constructor() : Interceptor {
+class UrlOverrideInterceptor : Interceptor {
 
     @Volatile
     private var oldValue: String? = null

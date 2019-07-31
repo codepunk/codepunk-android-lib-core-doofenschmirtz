@@ -20,14 +20,11 @@ package com.codepunk.doofenschmirtz.moshi.adapter
 import com.codepunk.doofenschmirtz.moshi.annotation.BooleanInt
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * A JSON adapter that converts between integers and booleans.
  */
-@Singleton
-class BooleanIntAdapter @Inject constructor() {
+class BooleanIntAdapter {
 
     // region Methods
 

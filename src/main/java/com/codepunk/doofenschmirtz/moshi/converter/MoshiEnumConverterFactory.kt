@@ -22,7 +22,6 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import java.lang.reflect.Field
 import java.lang.reflect.Type
-import javax.inject.Inject
 
 /**
  * A [Converter.Factory] for leveraging Moshi @[Json] annotations to use to convert enum values
@@ -30,7 +29,7 @@ import javax.inject.Inject
  *
  * See also: https://stackoverflow.com/questions/35793344/how-to-pass-custom-enum-in-query-via-retrofit
  */
-class MoshiEnumConverterFactory @Inject constructor() : Converter.Factory() {
+class MoshiEnumConverterFactory : Converter.Factory() {
 
     // region Inherited methods
 

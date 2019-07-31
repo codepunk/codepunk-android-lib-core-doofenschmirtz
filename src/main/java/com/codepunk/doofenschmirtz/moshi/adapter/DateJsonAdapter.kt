@@ -24,14 +24,11 @@ import java.io.IOException
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * A [JsonAdapter] that converts JSON date strings into [Date] instances.
  */
-@Singleton
-class DateJsonAdapter @Inject constructor() : JsonAdapter<Date>() {
+class DateJsonAdapter : JsonAdapter<Date>() {
 
     // region Inherited methods
 
