@@ -22,30 +22,26 @@
  *
  * In the following location:
  *
- *     GithubBrowserSample/app/src/main/java/com/android/example/github/vo/Resource.kt
+ *     GithubBrowserSample/app/src/main/java/com/android/example/github/util/AbsentLiveData.kt
  *
  */
 
-package com.codepunk.doofenschmirtz.borrowed.android.example.github.vo
+package com.codepunk.doofenschmirtz.borrowed.android.example.github.util
 
-import com.codepunk.doofenschmirtz.borrowed.android.example.github.vo.Status.*
+import androidx.lifecycle.LiveData
 
 /**
- * A generic class that holds a value with its loading status.
- * @param <T>
-</T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+ * A LiveData class that has `null` value.
+ */
+class AbsentLiveData<T : Any?> private constructor(): LiveData<T>() {
+    init {
+        // use post instead of set since this can be created on any thread
+        postValue(null)
+    }
+
     companion object {
-        fun <T> success(data: T?): Resource<T> {
-            return Resource(SUCCESS, data, null)
-        }
-
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(ERROR, data, msg)
-        }
-
-        fun <T> loading(data: T?): Resource<T> {
-            return Resource(LOADING, data, null)
+        fun <T> create(): LiveData<T> {
+            return AbsentLiveData()
         }
     }
 }

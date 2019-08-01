@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.retrofit.interceptor
+package com.codepunk.doofenschmirtz.data.remote.retrofit.interceptor
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.moshi.annotation
+package com.codepunk.doofenschmirtz.data.remote.moshi.annotation
 
 import com.squareup.moshi.JsonQualifier
 

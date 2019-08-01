@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.moshi.adapter
+package com.codepunk.doofenschmirtz.data.remote.moshi.adapter
 
-import com.codepunk.doofenschmirtz.moshi.annotation.BooleanInt
+import com.codepunk.doofenschmirtz.data.remote.moshi.annotation.BooleanInt
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 

@@ -48,7 +48,6 @@ import com.codepunk.doofenschmirtz.borrowed.android.example.github.vo.Resource
  * @param <ResultType>
  * @param <RequestType>
 </RequestType></ResultType> */
-@Suppress("UNUSED")
 abstract class NetworkBoundResource<ResultType, RequestType>
 @MainThread constructor(private val appExecutors: AppExecutors) {
 
@@ -118,29 +117,22 @@ abstract class NetworkBoundResource<ResultType, RequestType>
         }
     }
 
-    /** */
     protected open fun onFetchFailed() {}
 
-    /** */
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
-    /** */
     @WorkerThread
     protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
 
-    /** */
     @WorkerThread
     protected abstract fun saveCallResult(item: RequestType)
 
-    /** */
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean
 
-    /** */
     @MainThread
     protected abstract fun loadFromDb(): LiveData<ResultType>
 
-    /** */
     @MainThread
     protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>
 }

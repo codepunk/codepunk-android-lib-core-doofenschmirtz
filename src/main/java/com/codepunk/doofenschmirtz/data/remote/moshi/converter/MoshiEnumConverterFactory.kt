@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.moshi.converter
+package com.codepunk.doofenschmirtz.data.remote.moshi.converter
 
 import com.squareup.moshi.Json
 import retrofit2.Converter

@@ -15,42 +15,21 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.retrofit.interceptor
+package com.codepunk.doofenschmirtz.data.remote.retrofit.interceptor
 
+import com.codepunk.doofenschmirtz.data.remote.HEADER_NAME_AUTHORIZATION
+import com.codepunk.doofenschmirtz.data.remote.HEADER_NAME_TEMP_AUTH_TOKEN
+import com.codepunk.doofenschmirtz.data.remote.HEADER_VALUE_AUTHORIZATION
+import com.codepunk.doofenschmirtz.data.remote.HEADER_VALUE_AUTH_TOKEN_PLACEHOLDER
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-
-// region Constants
-
-/**
- * The "RemoteAuthorization" API header name.
- */
-const val HEADER_NAME_AUTHORIZATION = "Authorization"
-
-/**
- * A custom header name that supplies an auth token. This will be converted to the "Authorization"
- * header via an interceptor.
- */
-const val HEADER_NAME_TEMP_AUTH_TOKEN = "Temp-Auth-Token"
-
-/**
- * A placeholder for an auth token in endpoints that require authentication.
- */
-const val HEADER_VALUE_AUTH_TOKEN_PLACEHOLDER = "\$authToken"
-
-/**
- * A placeholder for an auth token in endpoints that require authentication.
- */
-const val HEADER_VALUE_AUTHORIZATION = "Bearer $HEADER_VALUE_AUTH_TOKEN_PLACEHOLDER"
-
-// endregion Constants
 
 /**
  * Singleton class that intercepts Retrofit requests and looks for a header with a name
  * of [HEADER_NAME_AUTHORIZATION] ("Authorization"). If found, any instance in the value matching
  * [HEADER_VALUE_AUTH_TOKEN_PLACEHOLDER] will be replaced with the authToken (if any) currently
- * stored in [SessionManager].
+ * stored in TODO [SessionManager].
  */
 class AuthorizationInterceptor(
 

@@ -24,6 +24,8 @@
  *
  *     GithubBrowserSample/app/src/main/java/com/android/example/github/api/ApiResponse.kt
  *
+ * Modifications:
+ * July 2019: Replaced Timber call with standard Log call.
  */
 
 package com.codepunk.doofenschmirtz.borrowed.android.example.github.api
@@ -36,15 +38,13 @@ import java.util.regex.Pattern
  * Common class used by API responses.
  * @param <T> the type of the response object
 </T> */
-@Suppress("UNUSED", "") // T is used in extending classes
+@Suppress("unused") // T is used in extending classes
 sealed class ApiResponse<T> {
     companion object {
-        /** */
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
         }
 
-        /** */
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
@@ -74,11 +74,8 @@ sealed class ApiResponse<T> {
  */
 class ApiEmptyResponse<T> : ApiResponse<T>()
 
-/** */
 data class ApiSuccessResponse<T>(
-    /** */
     val body: T,
-    /** */
     val links: Map<String, String>
 ) : ApiResponse<T>() {
     constructor(body: T, linkHeader: String?) : this(
@@ -86,8 +83,6 @@ data class ApiSuccessResponse<T>(
         links = linkHeader?.extractLinks() ?: emptyMap()
     )
 
-    /** **/
-    @Suppress("UNUSED", "")
     val nextPage: Int? by lazy(LazyThreadSafetyMode.NONE) {
         links[NEXT_LINK]?.let { next ->
             val matcher = PAGE_PATTERN.matcher(next)
@@ -97,7 +92,7 @@ data class ApiSuccessResponse<T>(
                 try {
                     Integer.parseInt(matcher.group(1))
                 } catch (ex: NumberFormatException) {
-                    Log.w("ApiResponse", "cannot parse next page from $next")
+                    Log.w(ApiResponse::class.java.simpleName,"cannot parse next page from $next")
                     null
                 }
             }
@@ -125,8 +120,4 @@ data class ApiSuccessResponse<T>(
     }
 }
 
-/** */
-data class ApiErrorResponse<T>(
-    /** */
-    val errorMessage: String
-) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.codepunk.doofenschmirtz.net
+package com.codepunk.doofenschmirtz.auth
 
 import android.os.Bundle
 
