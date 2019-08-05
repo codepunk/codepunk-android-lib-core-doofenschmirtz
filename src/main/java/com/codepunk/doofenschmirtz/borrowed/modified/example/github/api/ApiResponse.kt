@@ -26,13 +26,22 @@
  *
  * Modifications:
  * July 2019: Replaced Timber call with standard Log call.
+ * August 2019: Changed ApiErrorResponse to accept a Throwable or message String
+ *              Included Throwable in ApiErrorResponse creation
+ *              Attempt to extract "message" from errorBody().string() if the result is JSON
  */
 
-package com.codepunk.doofenschmirtz.borrowed.android.example.github.api
+package com.codepunk.doofenschmirtz.borrowed.modified.example.github.api
 
 import android.util.Log
+import com.codepunk.doofenschmirtz.util.http.HttpStatusException
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Response
 import java.util.regex.Pattern
+
+private const val MESSAGE_NAME = "message"
+private const val UNKNOWN_ERROR = "Unknown error"
 
 /**
  * Common class used by API responses.
@@ -42,7 +51,7 @@ import java.util.regex.Pattern
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(error.message ?: "unknown error")
+            return ApiErrorResponse(error.message ?: UNKNOWN_ERROR, error)
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
@@ -57,13 +66,21 @@ sealed class ApiResponse<T> {
                     )
                 }
             } else {
-                val msg = response.errorBody()?.string()
+                val errorStr = response.errorBody()?.string() ?: ""
+                val msg = try {
+                    JSONObject(errorStr).getString(MESSAGE_NAME)
+                } catch (e: JSONException) {
+                    errorStr
+                }
                 val errorMsg = if (msg.isNullOrEmpty()) {
                     response.message()
                 } else {
                     msg
                 }
-                ApiErrorResponse(errorMsg ?: "unknown error")
+                ApiErrorResponse(
+                    errorMsg ?: UNKNOWN_ERROR,
+                    HttpStatusException(response.code())
+                )
             }
         }
     }
@@ -92,10 +109,7 @@ data class ApiSuccessResponse<T>(
                 try {
                     Integer.parseInt(matcher.group(1))
                 } catch (ex: NumberFormatException) {
-                    Log.w(
-                        ApiSuccessResponse::class.java.simpleName,
-                        "cannot parse next page from $next"
-                    )
+                    Log.w(ApiResponse::class.java.simpleName,"cannot parse next page from $next")
                     null
                 }
             }
@@ -123,4 +137,7 @@ data class ApiSuccessResponse<T>(
     }
 }
 
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: String, val error: Throwable? = null) : ApiResponse<T>() {
+    constructor(error: Throwable) : this(error.localizedMessage, error)
+    constructor(response: ApiErrorResponse<*>) : this(response.errorMessage, response.error)
+}
