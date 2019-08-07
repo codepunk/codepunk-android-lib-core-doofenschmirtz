@@ -18,8 +18,7 @@
 
 <resources>
 
-    <style name="AppCompatEditTextEx" parent="Widget.AppCompat.EditText">
-        <item name="clearable">false</item>
+    <style name="AutoHeightRecyclerView" parent="@android:style/Widget">
     </style>
 
     <style name="TwoTargetSwitchPreference" parent="Preference.SwitchPreferenceCompat">

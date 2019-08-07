@@ -33,7 +33,8 @@
     <dimen name="size_baseline">@dimen/size_default</dimen>
 
     <dimen name="margin_fab">16dp</dimen>
-    <dimen name="margin_screen">24dp</dimen>
+    <dimen name="margin_screen_horizontal">24dp</dimen>
+    <dimen name="margin_screen_vertical">24dp</dimen>
 
     <dimen name="default_shake_distance">4dp</dimen>
 </resources>

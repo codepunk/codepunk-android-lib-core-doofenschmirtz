@@ -26,17 +26,17 @@
         <!-- =================== -->
         <eat-comment />
 
-        <!-- Default style for AppCompatEditTextEx. -->
-        <attr name="appCompatEditTextExStyle" format="reference" />
+        <!-- Default style for the AutoHeightRecyclerView widget. -->
+        <attr name="autoHeightRecyclerViewStyle" format="reference" />
 
         <!-- Default style for TwoTargetSwitchPreference. -->
         <attr name="twoTargetSwitchPreferenceStyle" format="reference" />
 
     </declare-styleable>
 
-    <!-- The set of attributes that describe an AppCompatEditTextEx's theme. -->
-    <declare-styleable name="AppCompatEditTextEx">
-        <attr name="clearable" format="boolean" />
+    <!-- The set of attributes that describe an AutoHeightRecyclerView's theme. -->
+    <declare-styleable name="AutoHeightRecyclerView">
+        <attr name="android:maxHeight" />
     </declare-styleable>
 
 </resources>
