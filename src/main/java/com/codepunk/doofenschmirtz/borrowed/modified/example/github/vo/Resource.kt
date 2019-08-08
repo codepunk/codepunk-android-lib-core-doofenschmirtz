@@ -18,9 +18,10 @@
 package com.codepunk.doofenschmirtz.borrowed.modified.example.github.vo
 
 import android.os.Bundle
+import com.codepunk.doofenschmirtz.borrowed.modified.example.github.repository.NetworkBoundResource
 
 /**
- * A sealed class representing the various outputs from a [Resourceinator].
+ * A sealed class representing the various outputs from a [NetworkBoundResource].
  */
 sealed class Resource<out T>(
 
@@ -50,32 +51,9 @@ sealed class Resource<out T>(
 
 }
 
-class PendingResource<T>(
-
-    extras: Bundle? = null
-
-) : Resource<T>(extras) {
-
-    // region Inherited methods
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is PendingResource<*>) return false
-        if (!super.equals(other)) return false
-        return true
-    }
-
-    override fun toString(): String {
-        return "PendingResource(extras=$extras)"
-    }
-
-    // endregion Inherited methods
-
-}
-
 abstract class DataResource<T>(
 
-    val data: T,
+    val data: T?,
 
     extras: Bundle? = null
 
@@ -95,7 +73,7 @@ abstract class DataResource<T>(
 
 class LoadingResource<T>(
 
-    data: T,
+    data: T? = null,
 
     extras: Bundle? = null
 
@@ -120,7 +98,7 @@ class LoadingResource<T>(
 
 class SuccessResource<T>(
 
-    data: T,
+    data: T? = null,
 
     extras: Bundle? = null
 
@@ -145,7 +123,7 @@ class SuccessResource<T>(
 
 class ErrorResource<T>(
 
-    data: T,
+    data: T? = null,
 
     val error: Throwable? = null,
 

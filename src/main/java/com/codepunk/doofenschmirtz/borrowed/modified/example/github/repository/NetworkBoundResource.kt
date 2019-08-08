@@ -56,7 +56,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     private val result = MediatorLiveData<Resource<ResultType>>()
 
     init {
-        result.value = PendingResource() /* TODO Resource.loading(null) */
+        result.value = LoadingResource() /* TODO Resource.loading(null) */
         @Suppress("LeakingThis")
         val dbSource = loadFromDb()
         result.addSource(dbSource) { data ->
