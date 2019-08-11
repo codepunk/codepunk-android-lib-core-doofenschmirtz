@@ -26,11 +26,15 @@
  *
  * Modifications:
  * July 2019: Replaced Timber call with standard Log call.
+ * August 2019: Added Throwable to ApiErrorResponse
+ *              More robust parsing of response.errorBody() in create methods
  */
 
 package com.codepunk.doofenschmirtz.borrowed.android.example.github.api
 
 import android.util.Log
+import com.codepunk.doofenschmirtz.inator.toHttpStatusException
+import com.codepunk.doofenschmirtz.util.http.HttpStatusException
 import retrofit2.Response
 import java.util.regex.Pattern
 
@@ -42,7 +46,7 @@ import java.util.regex.Pattern
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(error.message ?: "unknown error")
+            return ApiErrorResponse(error)
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {
@@ -57,13 +61,7 @@ sealed class ApiResponse<T> {
                     )
                 }
             } else {
-                val msg = response.errorBody()?.string()
-                val errorMsg = if (msg.isNullOrEmpty()) {
-                    response.message()
-                } else {
-                    msg
-                }
-                ApiErrorResponse(errorMsg ?: "unknown error")
+                ApiErrorResponse(response)
             }
         }
     }
@@ -123,4 +121,14 @@ data class ApiSuccessResponse<T>(
     }
 }
 
-data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()
+data class ApiErrorResponse<T>(
+    val response: Response<*>? = null,
+    val error: Throwable = response?.toHttpStatusException() ?: HttpStatusException(0)
+) : ApiResponse<T>() {
+
+    val errorMessage
+        get() = error.message ?: response?.message() ?: ""
+
+    constructor(error: Throwable) : this(null, error)
+
+}

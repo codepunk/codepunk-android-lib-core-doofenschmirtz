@@ -145,7 +145,7 @@ class HttpStatusException : RuntimeException {
     // region Inherited methods
 
     override fun toString(): String {
-        return "HttpStatusException(httpStatus=$httpStatus)"
+        return "HttpStatusException(httpStatus=$httpStatus, message=$message)"
     }
 
     // endregion Inherited methods

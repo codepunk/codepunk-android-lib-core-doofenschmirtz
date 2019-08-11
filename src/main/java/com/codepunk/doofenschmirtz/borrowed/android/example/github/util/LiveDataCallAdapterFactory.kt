@@ -30,7 +30,6 @@ package com.codepunk.doofenschmirtz.borrowed.android.example.github.util
 
 import androidx.lifecycle.LiveData
 import com.codepunk.doofenschmirtz.borrowed.android.example.github.api.ApiResponse
-import com.codepunk.doofenschmirtz.borrowed.modified.example.github.util.LiveDataCallAdapter
 import retrofit2.CallAdapter
 import retrofit2.CallAdapter.Factory
 import retrofit2.Retrofit

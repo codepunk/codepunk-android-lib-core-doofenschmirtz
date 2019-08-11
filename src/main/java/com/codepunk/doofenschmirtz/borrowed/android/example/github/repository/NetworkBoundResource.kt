@@ -24,6 +24,9 @@
  *
  *     GithubBrowserSample/app/src/main/java/com/android/example/github/repository/NetworkBoundResource.kt
  *
+ * Modifications:
+ * August 2019: Added Throwable to ApiErrorResponse
+ *              More robust parsing of response.errorBody() in create methods
  */
 
 package com.codepunk.doofenschmirtz.borrowed.android.example.github.repository
@@ -109,8 +112,12 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                 }
                 is ApiErrorResponse -> {
                     onFetchFailed()
+                    // TODO I think that Resource should have an "extra" element. This way we can
+                    // convert response.response?.errorBody()?.string() to an instance of
+                    // RemoteError (?) which should be Parcelable, and then we set it in the
+                    // Resource.
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.error(response.errorMessage, newData))
+                        setValue(Resource.error(response.errorMessage, response.error, newData))
                     }
                 }
             }

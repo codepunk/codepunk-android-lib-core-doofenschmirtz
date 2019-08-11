@@ -24,6 +24,9 @@
  *
  *     GithubBrowserSample/app/src/main/java/com/android/example/github/vo/Resource.kt
  *
+ * Modifications:
+ * August 2019: Added error Throwable to Resource
+ *              Added secondary constructor and additional versions of error() method
  */
 
 package com.codepunk.doofenschmirtz.borrowed.android.example.github.vo
@@ -34,18 +37,30 @@ import com.codepunk.doofenschmirtz.borrowed.android.example.github.vo.Status.*
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val message: String?, val error: Throwable?) {
+
+    constructor(status: Status, data: T?, error: Throwable? = null):
+        this(status, data, error?.message, error)
+
     companion object {
         fun <T> success(data: T?): Resource<T> {
-            return Resource(SUCCESS, data, null)
+            return Resource(SUCCESS, data, null, null)
         }
 
         fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(ERROR, data, msg)
+            return Resource(ERROR, data, msg, null)
+        }
+
+        fun <T> error(error: Throwable, data: T?): Resource<T> {
+            return Resource(ERROR, data, error)
+        }
+
+        fun <T> error(msg: String, error: Throwable, data: T?): Resource<T> {
+            return Resource(ERROR, data, msg, error)
         }
 
         fun <T> loading(data: T?): Resource<T> {
-            return Resource(LOADING, data, null)
+            return Resource(LOADING, data, null, null)
         }
     }
 }

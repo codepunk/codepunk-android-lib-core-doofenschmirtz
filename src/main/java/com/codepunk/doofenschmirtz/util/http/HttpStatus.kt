@@ -18,6 +18,8 @@
 package com.codepunk.doofenschmirtz.util.http
 
 import android.util.SparseArray
+import androidx.core.util.getOrDefault
+import androidx.core.util.getOrElse
 import com.codepunk.doofenschmirtz.util.http.HttpStatus.Category.*
 
 /**
@@ -195,8 +197,7 @@ class HttpStatus private constructor(
         val SWITCHING_PROTOCOLS = HttpStatus(
             101,
             "Switching Protocols"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * Standard response for successful HTTP requests.
@@ -338,8 +339,7 @@ class HttpStatus private constructor(
         val METHOD_NOT_ALLOWED = HttpStatus(
             405,
             "Method Not Allowed"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * The requested resource is capable of generating only content not acceptable according to
@@ -398,8 +398,7 @@ class HttpStatus private constructor(
         val PRECONDITION_FAILED = HttpStatus(
             412,
             "Precondition Failed"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * The request is larger than the server is willing or able to process.
@@ -417,8 +416,7 @@ class HttpStatus private constructor(
         val REQUEST_URI_TOO_LONG = HttpStatus(
             414,
             "Request-URI Too Long"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * The request entity has a media type which the server or resource does not support.
@@ -427,8 +425,7 @@ class HttpStatus private constructor(
         val UNSUPPORTED_MEDIA_TYPE = HttpStatus(
             415,
             "Unsupported Media Type"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * The client has asked for a portion of the file (byte serving) but the server cannot
@@ -447,8 +444,7 @@ class HttpStatus private constructor(
         val EXPECTATION_FAILED = HttpStatus(
             417,
             "Expectation Failed"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * This code was defined in 1998 as an April Fools' joke and is not expected to be
@@ -464,8 +460,7 @@ class HttpStatus private constructor(
         val UNPROCESSABLE_ENTITY = HttpStatus(
             422,
             "Unprocessable Entity"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * A generic error message, given when an unexpected condition was encountered and no more
@@ -475,8 +470,7 @@ class HttpStatus private constructor(
         val INTERNAL_SERVER_ERROR = HttpStatus(
             500,
             "Internal Server Error"
-        )
-            .addToLookup()
+        ).addToLookup()
 
         /**
          * The server either does not recognize the request method, or it lacks the ability to
@@ -534,12 +528,7 @@ class HttpStatus private constructor(
          * given code.
          */
         @JvmStatic
-        fun lookup(code: Int): HttpStatus {
-            return when (val predefined = lookupArray[code]) {
-                null -> HttpStatus(code)
-                else -> predefined
-            }
-        }
+        fun lookup(code: Int): HttpStatus = lookupArray.getOrDefault(code, HttpStatus(code))
 
         // endregion Methods
 
