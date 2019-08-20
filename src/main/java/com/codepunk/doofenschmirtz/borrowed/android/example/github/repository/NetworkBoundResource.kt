@@ -27,6 +27,8 @@
  * Modifications:
  * August 2019: Added Throwable to ApiErrorResponse
  *              More robust parsing of response.errorBody() in create methods
+ *              Make onFetchFailed return a customizable error (Throwable) that defaults to
+ *                  response.error which is then passed along to Resource.error()
  */
 
 package com.codepunk.doofenschmirtz.borrowed.android.example.github.repository
@@ -111,20 +113,19 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                     }
                 }
                 is ApiErrorResponse -> {
-                    onFetchFailed()
-                    // TODO I think that Resource should have an "extra" element. This way we can
-                    // convert response.response?.errorBody()?.string() to an instance of
-                    // RemoteError (?) which should be Parcelable, and then we set it in the
-                    // Resource.
+                    val error = onFetchFailed(response)
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.error(response.errorMessage, response.error, newData))
+                        val msg: String =
+                            response.response?.errorBody()?.string() ?: response.errorMessage
+                        setValue(Resource.error(error, msg, newData))
                     }
                 }
             }
         }
     }
 
-    protected open fun onFetchFailed() {}
+    protected open fun onFetchFailed(response: ApiErrorResponse<RequestType>): Throwable =
+        response.error
 
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 

@@ -37,9 +37,14 @@ import com.codepunk.doofenschmirtz.borrowed.android.example.github.vo.Status.*
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?, val error: Throwable?) {
+data class Resource<out T>(
+    val status: Status,
+    val data: T?,
+    val message: String?,
+    val error: Throwable?
+) {
 
-    constructor(status: Status, data: T?, error: Throwable? = null):
+    constructor(status: Status, data: T?, error: Throwable? = null) :
         this(status, data, error?.message, error)
 
     companion object {
@@ -47,15 +52,7 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
             return Resource(SUCCESS, data, null, null)
         }
 
-        fun <T> error(msg: String, data: T?): Resource<T> {
-            return Resource(ERROR, data, msg, null)
-        }
-
-        fun <T> error(error: Throwable, data: T?): Resource<T> {
-            return Resource(ERROR, data, error)
-        }
-
-        fun <T> error(msg: String, error: Throwable, data: T?): Resource<T> {
+        fun <T> error(error: Throwable, msg: String, data: T?): Resource<T> {
             return Resource(ERROR, data, msg, error)
         }
 
